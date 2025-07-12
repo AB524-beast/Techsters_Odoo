@@ -45,10 +45,14 @@
         </select><br /><br />
 
         <label for="profile-type">Profile Type:</label><br />
-        <input type="radio" id="public-profile" name="profile-type" value="public" />
-        <label for="public-profile">Public</label><br />
-        <input type="radio" id="private-profile" name="profile-type" value="private" checked />
-        <label for="private-profile">Private</label><br /><br />
+        <label for="public-profile" class="radio-label">
+            <input type="radio" id="public-profile" name="profile-type" value="public" />
+            Public
+        </label>
+        <label for="private-profile" class="radio-label">
+            <input type="radio" id="private-profile" name="profile-type" value="private" checked />
+            Private
+        </label><br /><br />
 
         <button type="submit">Save Profile</button>
     </form>
