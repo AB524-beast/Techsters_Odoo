@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skill Swap Platform - Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <section id="user-moderation">
+        <h2>User Moderation</h2>
+        <!-- Dynamic list of users with options to ban or review skill descriptions -->
+        <div id="user-list">
+            <!-- Example user entry -->
+            <!--
+            <div class="user-entry">
+                <p>User Name: John Doe</p>
+                <p>Status: Active</p>
+                <button id="ban-user-btn">Ban User</button>
+                <button id="review-skills-btn">Review Skills</button>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <section id="swap-monitoring">
+        <h2>Swap Monitoring</h2>
+        <!-- Dynamic list of swaps with status -->
+        <div id="swap-list">
+            <!-- Example swap entry -->
+            <!--
+            <div class="swap-entry">
+                <p>Swap ID: 12345</p>
+                <p>Status: Pending</p>
+                <button id="cancel-swap-btn">Cancel Swap</button>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <section id="platform-messages">
+        <h2>Platform-wide Messages</h2>
+        <form id="message-form">
+            <label for="message-text">Message:</label><br />
+            <textarea id="message-text" name="message-text" rows="4" cols="50" placeholder="Enter message to send to all users"></textarea><br />
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <section id="reports">
+        <h2>Reports</h2>
+        <!-- Dynamic links or buttons to download reports -->
+        <button id="download-user-activity-report-btn">Download User Activity Report</button>
+        <button id="download-feedback-logs-btn">Download Feedback Logs</button>
+        <button id="download-swap-stats-btn">Download Swap Stats</button>
+    </section>
+</body>
+</html>
