@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="Style.css"/>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <div id="profile-data">
+        <!-- Profile data will be displayed here -->
+    </div>
+    <script>
+        // Sample profiles data
+        const profiles = {
+            'Alice': {
+                name: 'Alice',
+                location: 'New York',
+                skillsOffered: ['JavaScript', 'React'],
+                skillsWanted: ['Python', 'Django'],
+                availability: 'Weekdays Mornings',
+                profileType: 'Public'
+            },
+            'Bob': {
+                name: 'Bob',
+                location: 'San Francisco',
+                skillsOffered: ['Python', 'Flask'],
+                skillsWanted: ['JavaScript', 'Vue.js'],
+                availability: 'Weekends Afternoons',
+                profileType: 'Private'
+            },
+            'Charlie': {
+                name: 'Charlie',
+                location: 'Chicago',
+                skillsOffered: ['Java', 'Spring'],
+                skillsWanted: ['JavaScript', 'Angular'],
+                availability: 'Anytime',
+                profileType: 'Public'
+            },
+            'Diana': {
+                name: 'Diana',
+                location: 'Seattle',
+                skillsOffered: ['C#', '.NET'],
+                skillsWanted: ['Java', 'Spring'],
+                availability: 'Weekdays Evenings',
+                profileType: 'Private'
+            }
+        };
+
+        // Get user from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('user');
+
+        const profileDiv = document.getElementById('profile-data');
+
+        if (userName && profiles[userName]) {
+            const profile = profiles[userName];
+            profileDiv.innerHTML = `
+                <h2>${profile.name}</h2>
+                <p><strong>Location:</strong> ${profile.location}</p>
+                <p><strong>Skills Offered:</strong> ${profile.skillsOffered.join(', ')}</p>
+                <p><strong>Skills Wanted:</strong> ${profile.skillsWanted.join(', ')}</p>
+                <p><strong>Availability:</strong> ${profile.availability}</p>
+                <p><strong>Profile Type:</strong> ${profile.profileType}</p>
+            `;
+        } else {
+            profileDiv.innerHTML = '<p>User profile not found.</p>';
+        }
+    </script>
+</body>
+</html>

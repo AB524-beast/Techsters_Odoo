@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skill Swap Platform - Signup</title>
+    <link rel="stylesheet" href="Style.css"/>
+</head>
+<body>
+    <h1>User Profile / Signup</h1>
+    <form id="profile-form">
+        <label for="name">Name: *</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="email">Email address: *</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="password">Password: *</label><br />
+        <input type="password" id="password" name="password" required /><br /><br />
+
+        <label for="location">Location: (optional)</label><br />
+        <input type="text" id="location" name="location" /><br /><br />
+
+        <label for="profile-photo">Profile Photo: (optional)</label><br />
+        <input type="file" id="profile-photo" name="profile-photo" accept="image/*" /><br /><br />
+
+        <label for="skills-offered">Skills Offered: *</label><br />
+        <!-- Dynamic list of skills offered to be inserted here -->
+        <textarea id="skills-offered" name="skills-offered" placeholder="List your skills offered, separated by commas" required></textarea><br /><br />
+
+        <label for="skills-wanted">Skills Wanted: *</label><br />
+        <!-- Dynamic list of skills wanted to be inserted here -->
+        <textarea id="skills-wanted" name="skills-wanted" placeholder="List skills you want to learn, separated by commas" required></textarea><br /><br />
+
+        <label for="availability">Availability: *</label><br />
+        <select id="availability" name="availability" required>
+            <option value="">Select availability</option>
+            <option value="weekdays-mornings">Weekdays Mornings</option>
+            <option value="weekdays-afternoons">Weekdays Afternoons</option>
+            <option value="weekdays-evenings">Weekdays Evenings</option>
+            <option value="weekends-mornings">Weekends Mornings</option>
+            <option value="weekends-afternoons">Weekends Afternoons</option>
+            <option value="weekends-evenings">Weekends Evenings</option>
+            <option value="anytime">Anytime</option>
+        </select><br /><br />
+
+        <label for="profile-type">Profile Type:</label><br />
+        <label for="public-profile" class="radio-label" style="display: inline-flex; align-items: center; gap: 0.25em;">
+            <input type="radio" id="public-profile" name="profile-type" value="public" style="margin: 0;" />
+            Public
+        </label>
+        <label for="private-profile" class="radio-label" style="display: inline-flex; align-items: center; gap: 0.25em; margin-left: 1em;">
+            <input type="radio" id="private-profile" name="profile-type" value="private" checked style="margin: 0;" />
+            Private
+        </label><br /><br />
+
+        <button type="submit">Save Profile</button>
+    </form>
+    <script>
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Simulate profile creation success
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skill Swap Platform - Browse Users</title>
+    <link rel="stylesheet" href="Style.css"/>
+</head>
+<body>
+    <h1>Browse Users by Skill</h1>
+    <button onclick="location.href='swaps.html'">Go to Swaps Page</button>
+    <form id="search-form">
+        <label for="search-skill">Search Skill:</label>
+        <input type="text" id="search-skill" name="search-skill" placeholder="Enter skill to search" />
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Users</h2>
+    <!-- Dynamic list of users matching search criteria to be inserted here -->
+    <div id="user-list">
+    </div>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userList = document.getElementById('user-list');
+            userList.innerHTML = '';
+            // Sample user names to display
+            const sampleUsers = ['Alice', 'Bob', 'Charlie', 'Diana'];
+            sampleUsers.forEach(name => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user-entry';
+                userDiv.innerHTML = `<h3><a href="profile.html?user=${encodeURIComponent(name)}">${name}</a></h3>`;
+                userList.appendChild(userDiv);
+            });
+        });
+    </script>
+</body>
+</html>

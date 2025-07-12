@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Color Variables */
+        :root {
+            --ivoy: #3A7C8E;
+            --ivoy-dark: #2C5E6C;
+            --ivoy-light: #4A9FB6;
+            --terracotta: #E07A5F;
+            --terracotta-dark: #C46A52;
+            --terracotta-light: #F08A70;
+            --light-bg: #f9fafb;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            color: var(--ivoy-dark);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--terracotta);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--ivoy);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--ivoy-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: var(--terracotta);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--ivoy);
+            color: var(--ivoy);
+        }
+
+        .btn-outline:hover {
+            background: var(--ivoy);
+            color: var(--white);
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--ivoy-dark);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            background: var(--terracotta);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover {
+            color: var(--terracotta-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--ivoy) 0%, var(--ivoy-dark) 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 25px;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--terracotta);
+            margin-bottom: 25px;
+        }
+
+        /* How It Works */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--ivoy-light);
+            z-index: 1;
+        }
+
+        .step {
+            background: var(--white);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--ivoy);
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow);
+            margin: 0 auto;
+        }
+
+        .step-item {
+            text-align: center;
+            width: 23%;
+            position: relative;
+        }
+
+        .step-content {
+            margin-top: 30px;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .skill-tag {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .skill-offered {
+            background: var(--ivoy-light);
+            color: var(--ivoy-dark);
+        }
+
+        .skill-wanted {
+            background: var(--terracotta-light);
+            color: var(--terracotta-dark);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--terracotta-light) 0%, var(--terracotta) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: var(--white);
+        }
+
+        .cta h2:after {
+            background: var(--white);
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--terracotta-light);
+            flex-shrink: 0;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--ivoy);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .skills-container-profile {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .edit-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--ivoy);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(58, 124, 142, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Browse Section */
+        .search-container {
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            padding: 0 30px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .user-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .user-card {
+            position: relative;
+        }
+
+        .user-img {
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            object-fit: cover;
+        }
+
+        .user-info {
+            padding: 60px 20px 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--ivoy-dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--terracotta);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .steps {
+                flex-wrap: wrap;
+            }
+            
+            .step-item {
+                width: 48%;
+                margin-bottom: 40px;
+            }
+            
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step-item {
+                width: 100%;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">S</span>
+                SkillSwap
+            </a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#browse" class="nav-link">Browse</a>
+                <a href="#profile" class="nav-link">Profile</a>
+                <a href="#swaps" class="nav-link">Swaps</a>
+                <a href="#" class="nav-link">Admin</a>
+                <button class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Swap Skills, Grow Together</h1>
+            <p>Connect with others to exchange your skills and learn new ones. No money needed - just your time and expertise!</p>
+            <div class="hero-btns">
+                <button class="btn btn-primary">Get Started</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="container">
+        <h2>How SkillSwap Works</h2>
+        <div class="steps">
+            <div class="step-item">
+                <div class="step">1</div>
+                <div class="step-content">
+                    <h3>Create Profile</h3>
+                    <p>List the skills you offer and what you want to learn</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step">2</div>
+                <div class="step-content">
+                    <h3>Find Partners</h3>
+                    <p>Browse and search for people with matching skills</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step">3</div>
+                <div class="step-content">
+                    <h3>Connect</h3>
+                    <p>Send swap requests and schedule your exchange</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step">4</div>
+                <div class="step-content">
+                    <h3>Swap & Learn</h3>
+                    <p>Share your skills and learn something new</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Section -->
+    <section id="browse" class="container">
+        <h2>Browse Users</h2>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search by skill (e.g. Photoshop, Excel)">
+            <button class="btn btn-primary search-btn">Search</button>
+        </div>
+        
+        <div class="user-grid">
+            <!-- User Card 1 -->
+            <div class="card user-card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="User" class="user-img">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Avatar" class="user-avatar">
+                <div class="user-info">
+                    <h3>Sarah Johnson</h3>
+                    <p>New York, NY</p>
+                    
+                    <div class="skills-container">
+                        <span class="skill-tag skill-offered">Graphic Design</span>
+                        <span class="skill-tag skill-offered">Photoshop</span>
+                        <span class="skill-tag skill-wanted">Photography</span>
+                        <span class="skill-tag skill-wanted">Spanish</span>
+                    </div>
+                    
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 20px;">
+                        Request Swap
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Card 2 -->
+            <div class="card user-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="User" class="user-img">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Avatar" class="user-avatar">
+                <div class="user-info">
+                    <h3>Michael Chen</h3>
+                    <p>San Francisco, CA</p>
+                    
+                    <div class="skills-container">
+                        <span class="skill-tag skill-offered">Web Development</span>
+                        <span class="skill-tag skill-offered">JavaScript</span>
+                        <span class="skill-tag skill-wanted">UI/UX Design</span>
+                        <span class="skill-tag skill-wanted">Digital Marketing</span>
+                    </div>
+                    
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 20px;">
+                        Request Swap
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Card 3 -->
+            <div class="card user-card">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="User" class="user-img">
+                <img src="https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Avatar" class="user-avatar">
+                <div class="user-info">
+                    <h3>Emma Rodriguez</h3>
+                    <p>Chicago, IL</p>
+                    
+                    <div class="skills-container">
+                        <span class="skill-tag skill-offered">Spanish Tutoring</span>
+                        <span class="skill-tag skill-offered">Cooking</span>
+                        <span class="skill-tag skill-wanted">Photography</span>
+                        <span class="skill-tag skill-wanted">Yoga</span>
+                    </div>
+                    
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 20px;">
+                        Request Swap
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="container">
+        <h2>Your Profile</h2>
+        <div class="card">
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Profile" class="profile-img">
+                <div class="profile-info">
+                    <h3>Alex Morgan</h3>
+                    <p>Seattle, WA</p>
+                    <p>Available: Weekends & Evenings</p>
+                    
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Swaps</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">4.7</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Skills</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Skills Offered</h4>
+                    <div class="skills-container-profile">
+                        <span class="skill-tag skill-offered">Photography</span>
+                        <span class="skill-tag skill-offered">Photo Editing</span>
+                        <span class="skill-tag skill-offered">Graphic Design</span>
+                    </div>
+                    
+                    <h4>Skills Wanted</h4>
+                    <div class="skills-container-profile">
+                        <span class="skill-tag skill-wanted">Web Development</span>
+                        <span class="skill-tag skill-wanted">Spanish</span>
+                        <span class="skill-tag skill-wanted">Guitar</span>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="margin-top: 25px;">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Profile Form -->
+        <div class="card" style="margin-top: 40px;">
+            <h3>Edit Profile</h3>
+            <form class="edit-form">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" value="Alex Morgan">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" class="form-control" value="Seattle, WA">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="skillsOffered">Skills Offered (comma separated)</label>
+                    <textarea id="skillsOffered" class="form-control">Photography, Photo Editing, Graphic Design</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="skillsWanted">Skills Wanted (comma separated)</label>
+                    <textarea id="skillsWanted" class="form-control">Web Development, Spanish, Guitar</textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="availability">Availability</label>
+                            <select id="availability" class="form-control">
+                                <option>Weekdays Mornings</option>
+                                <option>Weekdays Afternoons</option>
+                                <option selected>Weekends & Evenings</option>
+                                <option>Anytime</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="profileType">Profile Type</label>
+                            <select id="profileType" class="form-control">
+                                <option>Public</option>
+                                <option selected>Private</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="profilePhoto">Profile Photo</label>
+                    <input type="file" id="profilePhoto" class="form-control">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Swaps Section -->
+    <section id="swaps" class="container">
+        <h2>Your Swap Requests</h2>
+        
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-content">
+                <h3>Pending Requests</h3>
+                
+                <div class="swap-item" style="display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee;">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                    <div style="flex: 1; padding: 0 20px;">
+                        <h4>Sarah Johnson</h4>
+                        <p>You offer: Photography | You request: Graphic Design</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary">Accept</button>
+                        <button class="btn btn-outline">Reject</button>
+                    </div>
+                </div>
+                
+                <div class="swap-item" style="display: flex; align-items: center; padding: 20px 0;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                    <div style="flex: 1; padding: 0 20px;">
+                        <h4>Michael Chen</h4>
+                        <p>You offer: Graphic Design | You request: Web Development</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary">Accept</button>
+                        <button class="btn btn-outline">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-content">
+                <h3>Active Swaps</h3>
+                
+                <div class="swap-item" style="display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid #eee;">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                    <div style="flex: 1; padding: 0 20px;">
+                        <h4>Emma Rodriguez</h4>
+                        <p>You're learning: Spanish | You're teaching: Photography</p>
+                        <div style="display: flex; align-items: center; margin-top: 5px;">
+                            <div style="color: gold;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span style="margin-left: 10px; color: var(--text-light);">4.5 (12 reviews)</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary">Complete Swap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>SkillSwap</h3>
+                    <p>Connect, share, and grow through skill exchange with people around you.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#browse">Browse</a></li>
+                        <li><a href="#profile">Profile</a></li>
+                        <li><a href="#swaps">Swaps</a></li>
+                        <li><a href="#">Admin</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@skillswap.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Seattle, WA 98101, USA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 SkillSwap. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
